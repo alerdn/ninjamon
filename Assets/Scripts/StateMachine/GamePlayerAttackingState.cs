@@ -12,7 +12,7 @@ public class GamePlayerAttackingState : GameBaseState
 
     public override void Enter()
     {
-        stateMachine.StartCoroutine(Attack(_attack));
+        stateMachine.StartCoroutine(Attack());
     }
 
     public override void Tick(float deltaTime)
@@ -23,10 +23,23 @@ public class GamePlayerAttackingState : GameBaseState
     {
     }
 
-    private IEnumerator Attack(AttackData attack)
+    private IEnumerator Attack()
     {
-        Debug.Log($"Player attacked with {_attack.Name}");
+        Debug.Log($"Player used {_attack.Name} on {stateMachine.Enemy}");
+
+        int damage = CalculateDamage(stateMachine.Player.GetStat(StatType.STRENGTH), _attack.Power);
+        stateMachine.Enemy.Damage(damage);
+
         yield return new WaitForSeconds(1f);
-        stateMachine.SwitchState(new GamePlayerTurnState(stateMachine));
+
+        if (stateMachine.Enemy.CurrentHP == 0)
+        {
+            Debug.Log("Batalha finalizada: o player venceu");
+            stateMachine.SwitchState(new GameIdleState(stateMachine));
+        }
+        else
+        {
+            stateMachine.SwitchState(new GameEnemyTurnState(stateMachine));
+        }
     }
 }

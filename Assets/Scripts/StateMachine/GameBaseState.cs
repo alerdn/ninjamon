@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public abstract class GameBaseState : State
 {
     protected GameStateMachine stateMachine;
@@ -5,5 +7,10 @@ public abstract class GameBaseState : State
     public GameBaseState(GameStateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
+    }
+
+    public int CalculateDamage(float strength, float power)
+    {
+        return Mathf.RoundToInt(strength * (power / 100f));
     }
 }

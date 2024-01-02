@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,22 +9,25 @@ public class AttackButton : MonoBehaviour
 {
     public event Action<AttackData> OnClick;
 
-    [SerializeField] private AttackData attack;
+    [SerializeField] private TMP_Text _name;
 
+    private AttackData _attack;
     private Button _button;
 
     private void Awake()
     {
         _button = GetComponent<Button>();
+        _button.onClick.AddListener(Action);
     }
 
-    private void Start()
+    public void Init(AttackData attack)
     {
-        _button.onClick.AddListener(Action);
+        _attack = attack;
+        _name.text = _attack.Name;
     }
 
     private void Action()
     {
-        OnClick?.Invoke(attack);
+        OnClick?.Invoke(_attack);
     }
 }

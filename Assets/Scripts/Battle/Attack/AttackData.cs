@@ -5,4 +5,5 @@ using UnityEngine;
 public class AttackData
 {
     [field: SerializeField] public string Name { get; private set; }
+    [field: SerializeField] public int Power { get; private set; }
 }

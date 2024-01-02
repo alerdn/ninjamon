@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Battlefield : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [field: SerializeField] public ControlsUI Controls { get; private set; }
+    [field: SerializeField] public Unit Player { get; private set; }
+    [field: SerializeField] public Unit Enemy { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private GameStateMachine _gameStateMachine;
+
+    private void Start()
     {
-        
+        Controls.Init(Player);
+        _gameStateMachine.Init(Player, Enemy);
     }
 }
