@@ -25,12 +25,12 @@ public class GameEnemyAttackingState : GameBaseState
 
     private IEnumerator Attack()
     {
-        Debug.Log($"Enemy used {_attack.Name} on {stateMachine.Player}");
-
         int damage = CalculateDamage(stateMachine.Enemy.GetStat(StatType.STRENGTH), _attack.Power);
+        Debug.Log($"Enemy used {_attack.Name} on {stateMachine.Player} and caused {damage} damage");
         stateMachine.Player.Damage(damage);
 
         yield return new WaitForSeconds(1f);
+        
         if (stateMachine.Player.CurrentHP == 0)
         {
             Debug.Log("Batalha finalizada: o inimigo venceu");

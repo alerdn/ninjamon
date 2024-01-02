@@ -25,9 +25,8 @@ public class GamePlayerAttackingState : GameBaseState
 
     private IEnumerator Attack()
     {
-        Debug.Log($"Player used {_attack.Name} on {stateMachine.Enemy}");
-
         int damage = CalculateDamage(stateMachine.Player.GetStat(StatType.STRENGTH), _attack.Power);
+        Debug.Log($"Player used {_attack.Name} on {stateMachine.Enemy} and caused {damage} damage");
         stateMachine.Enemy.Damage(damage);
 
         yield return new WaitForSeconds(1f);

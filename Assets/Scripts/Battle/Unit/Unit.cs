@@ -29,4 +29,9 @@ public class Unit : MonoBehaviour
     {
         Debug.Log($"{this.name} is dead");
     }
+
+    public void Heal(int amount)
+    {
+        CurrentHP = Mathf.Min(CurrentHP + amount, MaxHP);
+    }
 }
